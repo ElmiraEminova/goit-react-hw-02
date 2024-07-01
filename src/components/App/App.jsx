@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Description from "../Description/Description";
 import Feedback from '../Feedback/Feedback';
 import Options from '../Options/Options';
+import Notification from '../Notification/Notification';
 
 export default function App() {
 
@@ -18,11 +19,14 @@ export default function App() {
     localStorage.setItem('feedback', JSON.stringify(feedback));
   }, [feedback]);
 
+  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
+  const positiveFeedbackPercentage = Math.round((feedback.good / totalFeedback) * 100);
+
   return (
     <div>
       <Description />
-      <Options feedback={feedback} setFeedback={setFeedback} />
-      <Feedback feedback={feedback} />
+      <Options setFeedback={setFeedback} totalFeedback={totalFeedback} />
+      {totalFeedback > 0 ? <Feedback feedback={feedback} totalFeedback={totalFeedback} positiveFeedbackPercentage={positiveFeedbackPercentage}  /> : <Notification />}
     </div>
   );
 }
