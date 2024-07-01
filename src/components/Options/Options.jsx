@@ -1,15 +1,4 @@
-export default function Options({ setFeedback, totalFeedback }) {
-     const updateFeedback = (feedbackType) => {
-    setFeedback((prevFeedback) => ({
-      ...prevFeedback,
-      [feedbackType]: prevFeedback[feedbackType] + 1,
-    }));
-  };
-
-  const resetFeedback = () => {
-    setFeedback({ good: 0, neutral: 0, bad: 0 });
-  };
-
+export default function Options({ updateFeedback, totalFeedback, resetFeedback }) {
   return (
     <div>
       <button onClick={() => updateFeedback('good')}>Good</button>
